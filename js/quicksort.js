@@ -1,21 +1,33 @@
-let array = generateArray();
-
-console.log('Array não ordenado');
-console.log(array);
-
-console.log('Array ordenado');
-quickSort(array, 0, array.length -1 );
-console.log(array);
+var array = generateArray();
 
 function generateArray() {
+    
     let numbers = [];
-
+    
     for (var i = 0; i < 5; i++) {
         let randomNumber = Math.floor(Math.random() * (100 + 1));
         numbers.push(randomNumber);
     }
 
+    array = numbers;
+
+    showArray(numbers,"#array-desordenado")
+
     return numbers;
+}
+
+function showArray(numbers, idCampo){
+    
+    let array = document.querySelector(idCampo);
+
+    var stringNumbers = '';
+
+    numbers.forEach(number => {
+        stringNumbers += `| ${number} `;
+    });
+
+    array.textContent = stringNumbers + '|';
+
 }
 
 function quickSort(array, lowOrig, highOrig) {
@@ -53,6 +65,8 @@ function quickSort(array, lowOrig, highOrig) {
             quickSort(array, low, highOrig);
         }
     }
+
+    showArray(array, "#array-ordenado");
 
     return array;
 
